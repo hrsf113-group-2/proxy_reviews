@@ -10,10 +10,10 @@ const port = process.env.PORT || 3000;
 // app.use(cors);
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/location/:locationID', express.static(path.join(__dirname, 'public')));
 
-app.get('/locations/2/reviews', (req, res) => {
-  axios.get('http://localhost:3001/locations/2/reviews')
+app.get('/api/locations/:locationID/reviews', (req, res) => {
+  axios.get(`http://localhost:3004/api/locations/${req.params.locationID}/reviews`)
     .then((currentLocationReviews) => {
       res.send(currentLocationReviews.data)
     })
