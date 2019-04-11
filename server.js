@@ -20,6 +20,13 @@ app.get('/api/locations/:locationID/reviews', (req, res) => {
     .catch((error) => console.log(error))
 })
 
+app.get('/rooms/:room_id/reservations', (req, res) => {
+  axios.get(`http://localhost:3001/rooms/${req.params.room_id}/reservations`)
+  .then((checkoutInfo) => {
+    res.send(checkoutInfo.data)
+  }) 
+})
+
 
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
