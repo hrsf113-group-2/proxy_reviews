@@ -1,13 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
 const axios = require('axios');
-// const cors = require('cors');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-
-// app.use(cors);
 
 app.use(morgan('dev'));
 app.use('/location/:locationID', express.static(path.join(__dirname, 'public')));
@@ -28,10 +25,16 @@ app.get('/rooms/:room_id/reservations', (req, res) => {
 })
 
 app.get('/relatedlisting', (req, res) => {
-  console.log('HIT BRADS GET REQUEST IN PROXY')
   axios.get(`http://localhost:3003/relatedlisting`)
   .then((listingInfo) => {
     res.send(JSON.stringify(listingInfo.data));
+  })
+})
+
+app.get('/photos/byroom/:roomid/all', (req, res) => {
+  axios.get(`http://localhost:3002/photos/byroom/${req.params.roomid}/all`)
+  .then((photos) => {
+    res.send(photos.data)
   })
 })
 
