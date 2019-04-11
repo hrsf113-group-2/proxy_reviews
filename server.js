@@ -27,6 +27,15 @@ app.get('/rooms/:room_id/reservations', (req, res) => {
   }) 
 })
 
+app.get('/relatedlisting', (req, res) => {
+  console.log('HIT BRADS GET REQUEST IN PROXY')
+  axios.get(`http://localhost:3003/relatedlisting`)
+  .then((listingInfo) => {
+    console.log('LISTINGINFO: ', listingInfo)
+    res.send(JSON.stringify(listingInfo.data));
+  })
+})
+
 
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
