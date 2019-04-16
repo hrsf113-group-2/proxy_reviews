@@ -10,7 +10,7 @@ app.use(morgan('dev'));
 app.use('/location/:locationID', express.static(path.join(__dirname, 'public')));
 
 app.get('/api/locations/:locationID/reviews', (req, res) => {
-  axios.get(`http://localhost:3004/api/locations/${req.params.locationID}/reviews`)
+  axios.get(`http://ec2-54-183-148-114.us-west-1.compute.amazonaws.com:3004/api/locations/${req.params.locationID}/reviews`)
     .then((currentLocationReviews) => {
       res.send(currentLocationReviews.data)
     })
@@ -18,7 +18,7 @@ app.get('/api/locations/:locationID/reviews', (req, res) => {
 })
 
 app.get('/rooms/:room_id/reservations', (req, res) => {
-  axios.get(`http://localhost:3001/rooms/${req.params.room_id}/reservations`)
+  axios.get(`http://18.224.202.85:3001/rooms/${req.params.room_id}/reservations`)
   .then((checkoutInfo) => {
     res.send(checkoutInfo.data)
   }) 
@@ -32,7 +32,7 @@ app.get('/relatedlisting', (req, res) => {
 })
 
 app.get('/photos/byroom/:roomid/all', (req, res) => {
-  axios.get(`http://localhost:3002/photos/byroom/${req.params.roomid}/all`)
+  axios.get(`http://18.221.66.68:3002/photos/byroom/${req.params.roomid}/all`)
   .then((photos) => {
     res.send(photos.data)
   })
@@ -42,3 +42,4 @@ app.get('/photos/byroom/:roomid/all', (req, res) => {
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
 });
+ 
